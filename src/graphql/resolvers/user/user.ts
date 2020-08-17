@@ -1,8 +1,7 @@
 import * as bcrypt from "bcryptjs";
 import { model } from "../../../models/index.model";
-import { RegisterUserInterface } from "../../../interfaces/userInterfaces/userInterface";
-import { RegisterValidation } from "../../../validations/userValidation";
-
+import { RegisterUserInterface, LoginUserInterface } from "../../../interfaces/userInterfaces/userInterface";
+import { RegisterValidation, LoginValidation } from "../../../validations/userValidation";
 
 export const users = async () => {
   return await model.user.findAll();
@@ -14,17 +13,20 @@ export const user = async (root: any, args: { id: number }) => {
 };
 
 export const RegisterUser = async (root: any, args: RegisterUserInterface) => {
-  
+  // validate the data coming in from the graphql request using Joi package 
+  const { error } = RegisterValidation(args);
 
-  const { error } = RegisterValidation(args)
+  // hash the user password using bcrypt
   const salt = await bcrypt.genSalt(10);
   args.password = await bcrypt.hash(args.password, salt);
+
   // since email will be unique, check if email exists
   const findEmail = await model.user.findByEmail(args.email);
 
   // username will be uinique too, check if it exists
   const findUsername = await model.user.findOne({ username: args.username });
 
+  // complete validation check
   if (findEmail) {
     const success = false;
     const message = "Email already exists, choose another one";
@@ -35,8 +37,8 @@ export const RegisterUser = async (root: any, args: RegisterUserInterface) => {
     return { success, message };
   } else if (error) {
     const success = false;
-    const message = error.details[0].message
-    return {success, message}
+    const message = error.details[0].message;
+    return { success, message };
   } else {
     await model.user.insertUser(args);
     const success = true;
@@ -48,3 +50,27 @@ export const RegisterUser = async (root: any, args: RegisterUserInterface) => {
     return { success, message, newUser };
   }
 };
+
+// Login user resolver
+export const LoginUser = async (_: any, args: LoginUserInterface) => {
+    const user = await model.user.findByEmail(args.email)
+    const {error} = LoginValidation(args)
+    if(!user) {
+        return {success: false, message: "email does not exists"}
+    } else if(error){
+        const success = false;
+        const message = "Email or password is invalid";
+        return { success, message };
+    } else{
+        console.log(user.password);
+        console.log(args.password);
+        
+        
+        const validUser = await bcrypt.compare(args.password, user.password)
+        if (validUser){
+            return {success: true, message: "logged in", user: user}
+        }else{
+            return {success: false, message: "Invalid password"}
+        }
+    }
+}

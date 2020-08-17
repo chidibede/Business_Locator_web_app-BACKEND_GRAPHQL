@@ -11,6 +11,11 @@ export interface RegisterUserInterface {
     password: string
 }
 
+export interface LoginUserInterface {
+    email: string,
+    password: string
+}
+
 export interface UpdateUserInterface {
     id?: number,
     username?: string,

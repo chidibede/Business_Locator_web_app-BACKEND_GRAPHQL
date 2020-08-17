@@ -21,6 +21,6 @@ export const LoginUserResponse =  gql`
     type LoginUserResponse {
         success: Boolean!
         message: String!
-        newUser: User
+        user: User
     }
 `
