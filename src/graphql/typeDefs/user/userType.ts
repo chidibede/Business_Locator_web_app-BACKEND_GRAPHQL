@@ -11,7 +11,7 @@ export const User =  gql`
 
 export const RegisterUserResponse =  gql`
     type RegisterUserResponse {
-        success: String!
+        success: Boolean!
         message: String!
         newUser: User
     }
@@ -19,7 +19,7 @@ export const RegisterUserResponse =  gql`
 
 export const LoginUserResponse =  gql`
     type LoginUserResponse {
-        success: String!
+        success: Boolean!
         message: String!
         newUser: User
     }
