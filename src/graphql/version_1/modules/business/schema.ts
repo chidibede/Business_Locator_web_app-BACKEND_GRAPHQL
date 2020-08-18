@@ -11,7 +11,6 @@ const typeDefs = gql`
     name: String!
     location: String!
     price_range: Int
-    business_category_id: Int
   }
 
   type CreateBusinessResponse {

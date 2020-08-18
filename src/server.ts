@@ -7,7 +7,7 @@ import morgan from "morgan";
 
 const app: Application = express();
 
-app.use(morgan("dev"));
+// app.use(morgan("dev"));
 
 const apolloServer = new ApolloServer({
   modules: [

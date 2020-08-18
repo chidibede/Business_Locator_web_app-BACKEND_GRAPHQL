@@ -32,6 +32,10 @@ export class Model {
     return this.connection(this.table).where(conditions).select().first();
   }
 
+  find(conditions: {}) {
+    return this.connection(this.table).where(conditions).select();
+  }
+
   findChildren(
     conditions: {},
     child_table: string,

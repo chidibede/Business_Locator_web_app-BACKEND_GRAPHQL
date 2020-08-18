@@ -1,6 +1,7 @@
 import { model } from "../../../../../models/index.model";
 import { CreateBusinessCategoryInterface } from "../../../../../interfaces/businessCategoryInterfaces/businessCategoryInterface";
 
+
 export const businessCategories = async () => {
   return await model.businessCategory.findAll();
 };
@@ -32,7 +33,3 @@ export const CreateBusinessCategory = async (
   }
 };
 
-
-export const getBusinessFromBusinessCategory = async (Business: any, {id}: {id: number},   ) => {
-    return await model.businessCategory.findChildren({id: id}, 'business', {'business.id': 'businessCategories.id'})
-};

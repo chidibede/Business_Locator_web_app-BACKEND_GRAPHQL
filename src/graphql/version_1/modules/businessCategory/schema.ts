@@ -6,10 +6,6 @@ const typeDefs = gql`
     businessCategories: [BusinessCategory!]
   }
 
-  extend type Business{
-    businesses: [Business]
-  }
-
   type BusinessCategory {
     id: ID!
     name: String!
