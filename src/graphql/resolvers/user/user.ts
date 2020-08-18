@@ -1,7 +1,15 @@
+require("dotenv").config({ path: "src/.env" });
 import * as bcrypt from "bcryptjs";
 import { model } from "../../../models/index.model";
-import { RegisterUserInterface, LoginUserInterface } from "../../../interfaces/userInterfaces/userInterface";
-import { RegisterValidation, LoginValidation } from "../../../validations/userValidation";
+import {
+  RegisterUserInterface,
+  LoginUserInterface,
+} from "../../../interfaces/userInterfaces/userInterface";
+import {
+  RegisterValidation,
+  LoginValidation,
+} from "../../../validations/userValidation";
+import jwt from "jsonwebtoken";
 
 export const users = async () => {
   return await model.user.findAll();
@@ -13,7 +21,7 @@ export const user = async (root: any, args: { id: number }) => {
 };
 
 export const RegisterUser = async (root: any, args: RegisterUserInterface) => {
-  // validate the data coming in from the graphql request using Joi package 
+  // validate the data coming in from the graphql request using Joi package
   const { error } = RegisterValidation(args);
 
   // hash the user password using bcrypt
@@ -53,24 +61,27 @@ export const RegisterUser = async (root: any, args: RegisterUserInterface) => {
 
 // Login user resolver
 export const LoginUser = async (_: any, args: LoginUserInterface) => {
-    const user = await model.user.findByEmail(args.email)
-    const {error} = LoginValidation(args)
-    if(!user) {
-        return {success: false, message: "email does not exists"}
-    } else if(error){
-        const success = false;
-        const message = "Email or password is invalid";
-        return { success, message };
-    } else{
-        console.log(user.password);
-        console.log(args.password);
-        
-        
-        const validUser = await bcrypt.compare(args.password, user.password)
-        if (validUser){
-            return {success: true, message: "logged in", user: user}
-        }else{
-            return {success: false, message: "Invalid password"}
-        }
+  const user = await model.user.findByEmail(args.email);
+  const { error } = LoginValidation(args);
+  if (!user) {
+    return { success: false, message: "email does not exists" };
+  } else if (error) {
+    const success = false;
+    const message = "Email or password is invalid";
+    return { success, message };
+  } else {
+    const validUser = await bcrypt.compare(args.password, user.password);
+    const secret: string | undefined = process.env.TOKEN_SECRET || "";
+    if (validUser) {
+      // create and assign token
+      const token = jwt.sign(
+        { id: user.id, username: user.username, email: user.email },
+        secret,
+        { expiresIn: "7d" }
+      );
+      return { success: true, message: "logged in", user: user , token: token};
+    } else {
+      return { success: false, message: "Invalid password" };
     }
-}
+  }
+};

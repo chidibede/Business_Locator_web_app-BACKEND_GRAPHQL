@@ -12,6 +12,7 @@ export interface RegisterUserInterface {
 }
 
 export interface LoginUserInterface {
+    id?: number,
     email: string,
     password: string
 }

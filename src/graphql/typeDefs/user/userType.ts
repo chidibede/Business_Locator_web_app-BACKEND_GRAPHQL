@@ -2,6 +2,7 @@ import {gql} from 'apollo-server-express';
 
 export const User =  gql`
     type User {
+        id: ID
         username: String!
         email: String!
         password: String!
@@ -22,5 +23,6 @@ export const LoginUserResponse =  gql`
         success: Boolean!
         message: String!
         user: User
+        token: String!
     }
 `
