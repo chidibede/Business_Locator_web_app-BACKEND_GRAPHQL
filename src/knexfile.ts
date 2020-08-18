@@ -1,8 +1,7 @@
 // dotenv makes it easy to work with .env files which hides sensitive data from the public
-require('dotenv').config({path: 'src/.env'});
+require('dotenv').config();
 
 export = {
-
   // object houses the different configurations for the different environments
   development: {
     client: "pg",

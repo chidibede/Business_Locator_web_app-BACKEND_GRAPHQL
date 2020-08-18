@@ -1,5 +1,10 @@
 import Knex from "knex";
-import {RegisterUserInterface, UpdateUserInterface} from '../interfaces/userInterfaces/userInterface'
+import {
+  RegisterUserInterface,
+  UpdateUserInterface,
+} from "../interfaces/userInterfaces/userInterface";
+import { CreateBusinessCategoryInterface } from "../interfaces/businessCategoryInterfaces/businessCategoryInterface";
+import { CreateBusinessInterface } from "../interfaces/businessInterfaces/businessInterface";
 
 // create the class that will model all the possible database queries
 export class Model {
@@ -27,6 +32,16 @@ export class Model {
     return this.connection(this.table).where(conditions).select().first();
   }
 
+  findChildren(
+    conditions: {},
+    child_table: string,
+    relationship_conditions: {}
+  ) {
+    return this.connection(this.table)
+      .where(conditions)
+      .join(child_table, relationship_conditions);
+  }
+
   insertUser(values: RegisterUserInterface) {
     return this.connection(this.table).insert(values);
   }
@@ -36,6 +51,30 @@ export class Model {
   }
 
   deleteUser(id: number) {
+    return this.connection(this.table).where({ id }).del();
+  }
+
+  insertBusinessCategory(values: CreateBusinessCategoryInterface) {
+    return this.connection(this.table).insert(values);
+  }
+
+  updateBusinessCategory(id: number, values: CreateBusinessCategoryInterface) {
+    return this.connection(this.table).where({ id }).update(values);
+  }
+
+  deleteBusinessCategory(id: number) {
+    return this.connection(this.table).where({ id }).del();
+  }
+
+  insertBusiness(values: CreateBusinessInterface) {
+    return this.connection(this.table).insert(values);
+  }
+
+  updateBusiness(id: number, values: CreateBusinessInterface) {
+    return this.connection(this.table).where({ id }).update(values);
+  }
+
+  deleteBusiness(id: number) {
     return this.connection(this.table).where({ id }).del();
   }
 }

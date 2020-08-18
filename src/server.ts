@@ -1,7 +1,7 @@
 import express, { Application } from "express";
 import { ApolloServer } from "apollo-server-express";
-import { typeDefs } from "./graphql/schema";
-import { resolvers } from "./graphql/resolvers";
+// import { typeDefs } from "./graphql/schema";
+// import { resolvers } from "./graphql/resolvers";
 import morgan from "morgan";
 
 
@@ -10,8 +10,10 @@ const app: Application = express();
 app.use(morgan("dev"));
 
 const apolloServer = new ApolloServer({
-  typeDefs,
-  resolvers,
+  modules: [
+    require('./graphql/version_1/modules/business/index'),
+    require('./graphql/version_1/modules/businessCategory/index')
+  ],
   context: ({ req }) => {
     // get the authorization from the request headers and return the auth if there is
     const auth = req.headers.authorization || "";
