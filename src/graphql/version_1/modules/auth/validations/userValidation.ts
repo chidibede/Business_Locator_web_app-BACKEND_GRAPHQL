@@ -1,5 +1,5 @@
 import Joi from "joi";
-import { RegisterUserInterface, LoginUserInterface } from "../interfaces/userInterfaces/userInterface";
+import { RegisterUserInterface, LoginUserInterface } from "../../../../../interfaces/userInterfaces/userInterface";
 
 export const RegisterValidation = (data: RegisterUserInterface) => {
   const schema = Joi.object({
