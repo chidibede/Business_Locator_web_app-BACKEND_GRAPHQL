@@ -9,7 +9,7 @@ export interface CreateBusinessInterface {
     name: string,
     location: string,
     price_range?: number
-    business_category_id: number
+    businessCategoryId: number
 }
 
 

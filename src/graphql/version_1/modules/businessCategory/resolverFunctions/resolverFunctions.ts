@@ -1,7 +1,6 @@
 import { model } from "../../../../../models/index.model";
 import { CreateBusinessCategoryInterface } from "../../../../../interfaces/businessCategoryInterfaces/businessCategoryInterface";
 
-
 export const businessCategories = async () => {
   return await model.businessCategory.findAll();
 };
@@ -28,7 +27,7 @@ export const CreateBusinessCategory = async (
     return {
       success: true,
       message: "Business Category added successfully",
-      newBusiness: newBusinessCategory,
+      newBusinessCategory: newBusinessCategory,
     };
   }
 };

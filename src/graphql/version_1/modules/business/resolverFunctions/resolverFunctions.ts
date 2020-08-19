@@ -2,7 +2,12 @@ import { model } from "../../../../../models/index.model";
 import { CreateBusinessInterface } from "../../../../../interfaces/businessInterfaces/businessInterface";
 
 export const businesses = async () => {
-  return await model.business.findAll();
+  const business =  await model.business.findAll();
+  return business
+  // const businessCategory = await model.businessCategory.findById(business[0].id)
+  // return {business, businessCategory}
+  
+  
 };
 
 export const business = async (root: any, args: { id: number }) => {

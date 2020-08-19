@@ -9,6 +9,7 @@ const resolvers = {
   Mutation: {
     CreateBusiness,
   },
+
 };
 
 export default resolvers

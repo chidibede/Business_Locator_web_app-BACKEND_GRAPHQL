@@ -4,7 +4,6 @@ import {
   CreateBusinessCategory,
 } from "./resolverFunctions/resolverFunctions";
 import { model } from "../../../../models/index.model";
-import Knex from "knex";
 
 const resolvers = {
   Query: {
@@ -18,10 +17,10 @@ const resolvers = {
 
   // resolve the parent which then gets the children
   BusinessCategory : {
-    businesses: (businessCategory: any) => {
-      return model.business.find({business_category_id: businessCategory.id})
+    businesses: async (businessCategory: {id: number}) => {
+      return await model.business.find({businessCategoryId: businessCategory.id})
     }
-  }
+  },
 };
 
 export default resolvers;

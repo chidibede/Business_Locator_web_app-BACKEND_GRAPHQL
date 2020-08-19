@@ -2,10 +2,10 @@ import * as Knex from "knex";
 
 export async function up(knex: Knex): Promise<void> {
   knex.schema
-    .hasTable("business_category")
+    .hasTable("businessCategory")
     .then(exists => {
       if (!exists) {
-        return knex.schema.createTable("business_category", (table) => {
+        return knex.schema.createTable("businessCategory", (table) => {
           table.bigIncrements("id").primary();
           table.string("name").notNullable().unique();
           table.string("type").notNullable();
@@ -17,5 +17,5 @@ export async function up(knex: Knex): Promise<void> {
 }
 
 export async function down(knex: Knex): Promise<void> {
-  return knex.schema.dropTable("business_category");
+  return knex.schema.dropTable("businessCategory");
 }

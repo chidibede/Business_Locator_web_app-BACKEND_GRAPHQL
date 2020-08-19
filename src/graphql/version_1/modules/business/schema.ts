@@ -6,11 +6,13 @@ const typeDefs = gql`
     businesses: [Business!]
   }
 
+
   type Business {
     id: ID!
     name: String!
     location: String!
     price_range: Int
+    businessCategoryId: Int
   }
 
   type CreateBusinessResponse {
@@ -23,7 +25,7 @@ const typeDefs = gql`
     CreateBusiness(
       name: String!
       location: String!
-      business_category_id: Int!
+      businessCategoryId: Int!
       price_range: Int
     ): CreateBusinessResponse!
   }

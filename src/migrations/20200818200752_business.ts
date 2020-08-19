@@ -11,9 +11,9 @@ export async function up(knex: Knex): Promise<void> {
           table.string("location").notNullable();
           table.integer("price_range").nullable();
           table
-            .integer("business_category_id")
+            .integer("businessCategoryId")
             .references("id")
-            .inTable("business_category")
+            .inTable("businessCategory")
             .onDelete("CASCADE");
           table.timestamp("created_at").defaultTo(knex.fn.now());
         });
