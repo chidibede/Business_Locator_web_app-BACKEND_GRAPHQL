@@ -2,7 +2,7 @@
   "name": "sevice-business-locator-backend_rest",
   "version": "1.0.0",
   "description": "A Backend for the web app BusinessLocator",
-  "main": "dist/server.js",
+  "main": "dist/server.js", 
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node dist/server.js",
