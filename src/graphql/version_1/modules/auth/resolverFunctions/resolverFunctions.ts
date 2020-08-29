@@ -82,7 +82,6 @@ export const loginUser = async (_: any, args: LoginUserInterface) => {
       });
 
       const auth = {user: user, ...token}
-      console.log(auth);
       
       return { success: true, message: "logged in",  auth: auth };
     } else {
