@@ -17,6 +17,7 @@ const apolloServer = new ApolloServer({
     return { auth };
   },
   playground: true,
+  introspection: true
 });
 apolloServer.applyMiddleware({ app, path: "/graphql" });
 
