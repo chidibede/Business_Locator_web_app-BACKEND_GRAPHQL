@@ -1,7 +1,11 @@
 import express, { Application } from "express";
 import { ApolloServer } from "apollo-server-express";
+import cors from 'cors'
+import helmet from "helmet";
 
 const app: Application = express();
+app.use(cors())
+app.use(helmet())
 
 const apolloServer = new ApolloServer({
   modules: [
