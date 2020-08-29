@@ -2,7 +2,6 @@ import express, { Application } from "express";
 import { ApolloServer } from "apollo-server-express";
 // import { typeDefs } from "./graphql/schema";
 // import { resolvers } from "./graphql/resolvers";
-import morgan from "morgan";
 
 
 const app: Application = express();
