@@ -14,6 +14,7 @@ const apolloServer = new ApolloServer({
     require('./graphql/version_1/modules/businessCategory/index'),
     require('./graphql/version_1/modules/auth/index')
   ],
+  playground: true,
   context: ({ req }) => {
     // get the authorization from the request headers and return the auth if there is
     const auth = req.headers.authorization || "";
