@@ -1,8 +1,8 @@
 {
-  "name": "sevice-business-locator-backend_rest",
+  "name": "sevice-business-locator-backend_graphql",
   "version": "1.0.0",
   "description": "A Backend for the web app BusinessLocator",
-  "main": "dist/server.js", 
+  "main": "dist/server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node dist/server.js",
@@ -29,7 +29,7 @@
   },
   "homepage": "https://github.com/chidibede/sevice-business-locator-BACKEND_REST#readme",
   "dependencies": {
-    "apollo-server-express": "^2.16.1",
+    "apollo-server-express": "^2.17.0",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
